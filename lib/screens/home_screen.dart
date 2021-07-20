@@ -1,4 +1,5 @@
 import 'package:fitness_application/util/colors.dart';
+import 'package:fitness_application/widgets/laps_list_widget.dart';
 import 'package:fitness_application/widgets/stop_watch_widget.dart';
 import 'package:fitness_application/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class Home extends StatelessWidget {
             children: [
               TitleWidget(),
               StopWatchWidget(),
+              LapsListWidget(),
             ],
           ),
         ),

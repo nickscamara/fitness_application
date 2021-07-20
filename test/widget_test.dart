@@ -35,6 +35,30 @@ void main() {
 
       // get the provider and stop it
     });
+  });
+  group("second-task", () {
+    testWidgets('Records a lap when lap button is pressed',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(ProviderScope(child: MyApp()));
+      await tester.pumpAndSettle(const Duration(seconds: 2));
 
+      expect(find.text("00:00"), findsOneWidget);
+      expect(find.text("00:01"), findsNothing);
+
+      expect(find.text("Lap"), findsOneWidget);
+
+      await tester.tap(find.byKey(Key('start-button')));
+      await tester.pump(const Duration(seconds: 2));
+
+      await tester.tap(find.byKey(Key('lap-button')));
+      await tester.tap(find.byKey(Key('lap-button')));
+
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      expect(find.text("Lap 1"), findsOneWidget);
+      expect(find.text("Lap 2"), findsOneWidget);
+
+      // get the provider and stop it
+    });
   });
 }
