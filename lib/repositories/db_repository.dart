@@ -1,6 +1,5 @@
 import 'package:fitness_application/models/lap.dart';
 import 'package:fitness_application/models/stop_watch.dart';
-import 'package:fitness_application/providers/db_provider.dart';
 import 'package:fitness_application/providers/stop_watch_provider.dart';
 import 'package:fitness_application/util/stop_watch_state.dart';
 import 'package:flutter/foundation.dart';
@@ -9,7 +8,7 @@ import 'package:sqflite/sqflite.dart' as sql;
 import 'package:path/path.dart' as path;
 
 
-class DbController with ChangeNotifier {
+class DbRepository with ChangeNotifier {
 
 
   late Reader reader;
@@ -18,7 +17,7 @@ class DbController with ChangeNotifier {
   static final dbName = 'database.db';
   late sql.Database db;
 
-  DbController(Reader r) {
+  DbRepository(Reader r) {
     this.reader = r;
     // Initialize db
     init();
@@ -91,7 +90,5 @@ class DbController with ChangeNotifier {
             .toMap());
   }
 
-  void loadLastTime() async {
-    final data = await getData(timesTableName);
-  }
+  
 }

@@ -1,12 +1,9 @@
-import 'package:fitness_application/controllers/db_controller.dart';
 import 'package:fitness_application/models/lap.dart';
-import 'package:fitness_application/providers/db_provider.dart';
 import 'package:fitness_application/providers/stop_watch_provider.dart';
 import 'package:fitness_application/util/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:riverpod/riverpod.dart';
 
 class LapsListWidget extends HookWidget {
   @override

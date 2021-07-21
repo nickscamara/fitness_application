@@ -7,7 +7,6 @@ class Helper {
     return '$minutes:$seconds';
   }
   static StopWatchState processState(String s) {
-  print(s);
   if (s == "StopWatchState.Initial") {
     return StopWatchState.Initial;
   } else if (s == "StopWatchState.Running") {

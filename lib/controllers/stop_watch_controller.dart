@@ -21,6 +21,9 @@ class StopWatchController extends StateNotifier<StopWatch> {
 
   get stopWatchCount => count;
 
+  /// Set Initial Values when app is reopend
+  /// DB controller calls this method with the current laps and saved info on the timer
+  /// Calculates the time elapses and update the state accordingly.
   void setInitialValues(List<Lap> currentLaps, StopWatchSave savedData) async {
      _counter?.cancel();
     if ((currentLaps.length != 0 || savedData.epochTime != 0) && savedData.state != StopWatchState.Initial) {
@@ -40,10 +43,9 @@ class StopWatchController extends StateNotifier<StopWatch> {
          state = StopWatch(
               count: currentTime, state: StopWatchState.Stopped, laps: laps);
       }
-
     }
   }
-
+  /// Start the stop watch
   void start() {
     _counter?.cancel();
     _counter = startCounter().listen((duration) {
@@ -52,6 +54,7 @@ class StopWatchController extends StateNotifier<StopWatch> {
     });
   }
 
+  // Resume the stop watch based on the elapsed time
   void resume() {
     _counter = startCounter(initial:currentTime).listen((duration) {
       state = StopWatch(
@@ -59,6 +62,7 @@ class StopWatchController extends StateNotifier<StopWatch> {
     });
   }
 
+  /// Stop the stop watch
   void stop() {
     _counter!.pause();
     state = StopWatch(
@@ -67,6 +71,7 @@ class StopWatchController extends StateNotifier<StopWatch> {
 
   }
 
+  /// Counts a lap
   void lap() async {
     final lap = new Lap(currentTime, laps.length +1);
     _read(dbProvider).saveLap(lap);
@@ -75,6 +80,7 @@ class StopWatchController extends StateNotifier<StopWatch> {
         count: currentTime, state: StopWatchState.Running, laps: laps);
   }
 
+  /// Resets the timer
   void reset() {
     _read(dbProvider).getLaps();
     _read(dbProvider).deleteEntries();
@@ -85,7 +91,10 @@ class StopWatchController extends StateNotifier<StopWatch> {
         count: currentTime, state: StopWatchState.Initial, laps: laps);
   }
 
-
+  /// Starts the counter stream, save time in db every seconds
+  /// Alternative to this is using App Lifecycle
+  /// I almost got it but ran into some issues, decided to take the simpler
+  /// route for the sake of the exercise
   Stream<int> startCounter({int initial = 0}) {
     return Stream.periodic(
       Duration(seconds: 1),

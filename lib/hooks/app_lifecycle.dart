@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
+// unused
 useWidgetLifecycleObserver(BuildContext context) {
   return use(const _WidgetObserver());
 }
@@ -36,7 +36,6 @@ class _WidgetObserverState extends HookState<void, _WidgetObserver> with Widgets
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    print("app state now is $state");
     super.didChangeAppLifecycleState(state);
     setState(() {
       _state = state;

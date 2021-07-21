@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// note: i would use theme, theme data for a bigger project
+// note: i would use theme, <=> theme data for a bigger project
 class CustomColors {
   static const primaryColor = Colors.blue;
   static const accentColor = Colors.indigo;
