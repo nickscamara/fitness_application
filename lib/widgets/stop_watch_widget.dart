@@ -12,6 +12,7 @@ class StopWatchWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final txtStyle = const TextStyle(fontSize: 16);
     final timer = useProvider(stopWatchProvider.notifier);
     final timerState = useProvider(stopWatchProvider);
     return Column(
@@ -25,7 +26,7 @@ class StopWatchWidget extends HookWidget {
             if (timerState.state == StopWatchState.Stopped)
               CustomButton(
                 key: Key("reset-button"),
-                label: Text("Reset"),
+                label: Text("Reset",style: txtStyle),
                 onTap: () {
                   if (timerState.state == StopWatchState.Stopped) {
                     timer.reset();
@@ -35,7 +36,7 @@ class StopWatchWidget extends HookWidget {
             if (timerState.state != StopWatchState.Stopped)
               CustomButton(
                 key: Key("lap-button"),
-                label: Text("Lap"),
+                label: Text("Lap",style: txtStyle),
                 color: timerState.state == StopWatchState.Initial ? Colors.grey.withOpacity(.3) : CustomColors.primaryColor ,
                 onTap: () {
                   if (timerState.state == StopWatchState.Running) {
@@ -48,7 +49,7 @@ class StopWatchWidget extends HookWidget {
             ),
             if (timerState.state == StopWatchState.Initial)
               CustomButton(
-                label: Text("Start"),
+                label: Text("Start",style: txtStyle),
                 onTap: () {
                   if (timerState.state == StopWatchState.Initial) {
                     timer.start();
@@ -58,7 +59,7 @@ class StopWatchWidget extends HookWidget {
               ),
             if (timerState.state == StopWatchState.Stopped)
               CustomButton(
-                label: Text("Resume"),
+                label: Text("Resume",style: txtStyle),
                 color: Colors.green,
                 onTap: () {
                   if (timerState.state == StopWatchState.Stopped) {
@@ -69,7 +70,7 @@ class StopWatchWidget extends HookWidget {
               ),
             if (timerState.state == StopWatchState.Running)
               CustomButton(
-                label: Text("Stop"),
+                label: Text("Stop",style: txtStyle),
                 color: Colors.red,
                 onTap: () {
                   if (timerState.state == StopWatchState.Running) {

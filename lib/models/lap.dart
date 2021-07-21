@@ -1,12 +1,16 @@
-class Lap{
+class Lap {
   int currentTime;
   int lapNum;
-  Lap(this.currentTime,this.lapNum);
+  Lap(this.currentTime, this.lapNum);
 
-  toMap(){
+  toMap() {
     return {
-      "currentTime":currentTime,
-      "lapNum":lapNum,
+      "currentTime": currentTime,
+      "lapNum": lapNum,
     };
   }
+
+  Lap.fromMap(Map<String, dynamic> map)
+      : currentTime = map['currentTime'],
+        lapNum = map['lapNum'];
 }

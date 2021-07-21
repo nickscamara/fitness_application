@@ -12,10 +12,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fitness_application/main.dart';
 
 void main() {
+  // Note: known issue the tests arent running due to sqflite initialization.
+  // They run on commit #1
+
+  // TODO: fix sqflite initialization problem
   group("first-task", () {
     testWidgets(
         'Stopwatch starts when start is pressed and stops when stop is pressed',
         (WidgetTester tester) async {
+      setUp(() async {});
       await tester.pumpWidget(ProviderScope(child: MyApp()));
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
@@ -32,8 +37,6 @@ void main() {
       await tester.pump(const Duration(seconds: 2));
 
       expect(find.text('00:02'), findsOneWidget);
-
-      // get the provider and stop it
     });
   });
   group("second-task", () {
@@ -57,8 +60,6 @@ void main() {
 
       expect(find.text("Lap 1"), findsOneWidget);
       expect(find.text("Lap 2"), findsOneWidget);
-
-      // get the provider and stop it
     });
   });
 }
